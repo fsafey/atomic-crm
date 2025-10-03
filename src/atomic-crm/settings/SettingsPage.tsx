@@ -126,7 +126,7 @@ const SettingsForm = ({
   };
 
   return (
-    <div className="space-y-4">
+    <div className="flex flex-col gap-4 md:gap-6">
       <Card>
         <CardContent>
           <div className="mb-4 flex flex-row justify-between">

@@ -1,10 +1,12 @@
 import { RefreshButton, ThemeModeToggle, UserMenu } from "@/components/admin";
 import { useUserMenu } from "@/hooks/user-menu-context";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
+import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Settings, User } from "lucide-react";
 import { CanAccess } from "ra-core";
 import { Link, matchPath, useLocation } from "react-router";
 import { useConfigurationContext } from "../root/ConfigurationContext";
+import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 
 const Header = () => {
   const { darkModeLogo, lightModeLogo, title } = useConfigurationContext();
@@ -28,22 +30,25 @@ const Header = () => {
       <header className="bg-secondary">
         <div className="px-4">
           <div className="flex justify-between items-center flex-1">
-            <Link
-              to="/"
-              className="flex items-center gap-2 text-secondary-foreground no-underline"
-            >
-              <img
-                className="[.light_&]:hidden h-6"
-                src={darkModeLogo}
-                alt={title}
-              />
-              <img
-                className="[.dark_&]:hidden h-6"
-                src={lightModeLogo}
-                alt={title}
-              />
-              <h1 className="text-xl font-semibold">{title}</h1>
-            </Link>
+            <div className="flex items-center gap-2">
+              <SidebarTrigger />
+              <Link
+                to="/"
+                className="flex items-center gap-2 text-secondary-foreground no-underline"
+              >
+                <img
+                  className="[.light_&]:hidden h-6"
+                  src={darkModeLogo}
+                  alt={title}
+                />
+                <img
+                  className="[.dark_&]:hidden h-6"
+                  src={lightModeLogo}
+                  alt={title}
+                />
+                <h1 className="text-xl font-semibold">{title}</h1>
+              </Link>
+            </div>
             <div>
               <nav className="flex">
                 <NavigationTab
@@ -68,7 +73,8 @@ const Header = () => {
                 />
               </nav>
             </div>
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
+              <ThemeSwitcher />
               <ThemeModeToggle />
               <RefreshButton />
               <UserMenu>
